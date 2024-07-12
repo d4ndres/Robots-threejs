@@ -34,6 +34,57 @@ scene.fog = new Three.Fog(0x000000, 100, 200);
 scene.add(new Three.GridHelper(100, 100));
 
 
+const baseGeometry0 = new Three.CylinderGeometry(2, 2, 0.5, 32)
+const baseGeometry1 = new Three.CylinderGeometry(1, 2, 2, 32)
+baseGeometry1.translate(0, (2+0.5)/2, 0);
+let baseGeometry = mergeGeometries([baseGeometry1, baseGeometry0]);
+
+const meshBase = new Three.Mesh(
+  baseGeometry,
+  new Three.MeshStandardMaterial({ color: "#E7E7E7" })
+);
+meshBase.position.set(0, 0.5/2, 0);
+scene.add(meshBase);
+
+
+
+window.hombro = codoGenericoCuerpo();
+hombro.position.set(0, 2.5, 0);
+scene.add(hombro);
+console.log(hombro);
+
+// No funciona
+const codo = codoGenericoCuerpo( hombro );
+// codo.translateOnAxis(new Three.Vector3(0, 1, 0), 3);
+// codo.rotation.x = Math.PI/2;
+// codo.rotation.y = Math.PI;
+// codo.position.set(0, 2.5, 2);
+scene.add(codo);
+console.log(codo);
+
+// const hombroGeometry0 = new Three.CylinderGeometry(1, 1, 2.5, 32);
+// const meshHombro0 = new Three.Mesh(
+//   hombroGeometry0,
+//   new Three.MeshStandardMaterial({ color: "red" })
+// );
+// meshHombro0.position.set(0, 0, 0);
+
+// const hombroGeometry1 = new Three.CylinderGeometry(1, 1, 1, 32);
+// const meshHombro1 = new Three.Mesh(
+//   hombroGeometry1,
+//   new Three.MeshStandardMaterial({ color: "red" })
+// );
+// meshHombro1.rotation.x = Math.PI / 2;
+// meshHombro1.position.set(0, 0, 1);
+
+// const groupHombro = new Three.Group();
+// groupHombro.add(meshHombro0);
+// groupHombro.add(meshHombro1);
+// groupHombro.position.set(0, 2.5 / 2 + 2.5, 0);
+
+// scene.add(groupHombro);
+
+
 
 
 
