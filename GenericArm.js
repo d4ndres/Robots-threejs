@@ -7,6 +7,7 @@ export class GenericArm {
     this.linkAngles = linkProps.map( ({angle}) => angle || 0);
     this.linkDirections = linkProps.map( ({initialDirection}) => initialDirection || null);
     this.linkRotationAxis = linkProps.map( ({rotationAxis}) => rotationAxis || null);
+    this.linkAxes = linkProps.map( ({axes}) => axes || false);
     this.colors = linkProps.map( ({color}) => color || "#ff0000");
     this.joins = []
     this.robotBones = []
@@ -22,6 +23,7 @@ export class GenericArm {
         color: this.colors[i],
         initialPosition: i === 0 ? 0 : this.linkLengths[i-1],
         linkDirections: this.linkDirections[i],
+        axes: this.linkAxes[i]
       });
       parentObject.add(link);
       this.robotBones.push(link);
@@ -34,7 +36,7 @@ export class GenericArm {
     scene.add(this.Group);
   }
 
-  createLink({length, linkDirections, color, initialPosition = 0}) {
+  createLink({length, linkDirections, color, initialPosition = 0, axes}) {
     const radius = 0.2;
     const mesh = new Three.Mesh(
       new Three.CylinderGeometry(radius, radius, length, 4),
@@ -65,7 +67,10 @@ export class GenericArm {
       group.rotateOnAxis(new Three.Vector3(0, 1, 0), -Math.PI /2);
     }
 
-    group.add(new Three.AxesHelper(2));
+    if(axes) {
+      group.add(new Three.AxesHelper(2));
+    }
+
     return group;
   }
 
