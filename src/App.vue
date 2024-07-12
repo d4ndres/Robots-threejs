@@ -1,33 +1,31 @@
 <script setup>
 import { ref, computed } from 'vue'
 import {createScene} from './threeSetup.js'
-import {GenericArm} from './GenericArm.js';
+import {RobotUR3e, RobotScara} from './Robots.js';
 const { scene, stop, start} = createScene()
 
-const robotArm = new GenericArm({
-  linkProps: [
-    {length: 1, color: "#8B8A8A"}, // Fijo
-    {length: 2, color: "#97C1E0", rotationAxis: "y"}, // DOF 1
-    {length: 1, color: "#97C1E0", initialDirection: "x", rotationAxis: "y"}, // DOF 2
-    {length: 3, color: "#FAFAFA", initialDirection: "-x", rotationAxis: "y"},
-    {length: 1, color: "#97C1E0", initialDirection: "-x", rotationAxis: "y"}, // DOF 3
-    {length: 2.5, color: "#FAFAFA", initialDirection: "x", rotationAxis: "y"}, 
-    {length: 1, color: "#97C1E0", initialDirection: "z", rotationAxis: "y"}, // DOF 4
-    {length: 1, color: "#97C1E0", initialDirection: "x", rotationAxis: "y"}, // DOF 5
-    {length: 1, color: "#97C1E0", initialDirection: "x", rotationAxis: "y"},
-    {length: 0.2, color: "#FAFAFA", rotationAxis: "y", axes: true}, // DOF 6
-  
-  ]
-});
+const {robotUR3e: robotArm} = RobotUR3e();
 robotArm.addInScene(scene);
-robotArm.Group.position.set(0, 0, 0);
+// robotArm.Group.position.set(0, 0, 0);
+
+const {robotUR3e, autoRotation} = RobotUR3e();
+robotUR3e.addInScene(scene);
+robotUR3e.Group.position.set(-20, 0, -10);
+
+const {robotScara, autoRotation: autoRotationScara} = RobotScara();
+robotScara.addInScene(scene);
+robotScara.Group.position.set(-20, 0, 10);
 
 const menuIsActive = ref(true);
-
 const dof = ref([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
 const dofPosition = [1, 2, 4, 6, 7, 9];
+
+let times = 0;
 start(() => {
+  times += 0.01;
   robotArm.rotation(dof.value);
+  robotUR3e.rotation(autoRotation(times));
+  robotScara.rotation(autoRotationScara(times));
 })
 
 </script>

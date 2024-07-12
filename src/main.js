@@ -34,15 +34,15 @@ createApp(App).mount('#app')
 // scene.add(new Three.GridHelper(100, 100));
 
 
-// // const scara = new GenericArm({
-// //   linkProps: [
-// //     {length: 5, color: "#ff0000"}, // Fijo
-// //     {length: 5, color: "#00ff00", initialDirection: "x", rotationAxis: "z", axes: true},
-// //     {length: 6, color: "#0000ff", rotationAxis: "z", axes: true}
-// //   ]
-// // });
-// // scara.addInScene(scene);
-// // scara.Group.position.set(-10, 0, 10);
+// const scara = new GenericArm({
+//   linkProps: [
+//     {length: 5, color: "#ff0000"}, // Fijo
+//     {length: 5, color: "#00ff00", initialDirection: "x", rotationAxis: "z", axes: true},
+//     {length: 6, color: "#0000ff", rotationAxis: "z", axes: true}
+//   ]
+// });
+// scara.addInScene(scene);
+// scara.Group.position.set(-10, 0, 10);
 
 // const robotArm = new GenericArm({
 //   linkProps: [
@@ -71,12 +71,12 @@ createApp(App).mount('#app')
 //   renderer.render(scene, camera);
   
 
-//   // r1 += 0.01;
-//   // scara.rotation([ 
-//   //   0, 
-//   //   Math.sin(r1) * Math.PI / 2 + Math.PI / 2, 
-//   //   -Math.sin(r1) * Math.PI / 1.3, 
-//   // ]);
+  // r1 += 0.01;
+  // scara.rotation([ 
+  //   0, 
+  //   Math.sin(r1) * Math.PI / 2 + Math.PI / 2, 
+  //   -Math.sin(r1) * Math.PI / 1.3, 
+  // ]);
 
 //   r2 += 0.008;
 //   robotArm.rotation([ 
